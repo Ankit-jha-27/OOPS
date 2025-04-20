@@ -1,0 +1,141 @@
+interference:
+
+class Vehicle {
+    protected String licenceNumber, color, ownerName;
+    protected int speed;
+
+    Vehicle(String licenceNumber, int speed, String color, String ownerName) {
+        this.licenceNumber = licenceNumber;
+        this.speed = speed;
+        this.color = color;
+        this.ownerName = ownerName;
+    }
+
+    void showData() {
+        System.out.println("This is a vehicle class.");
+    }
+}
+
+class Bus extends Vehicle {
+    private String routeNo;
+
+    Bus(String licenceNumber, int speed, String color, String ownerName, String routeNo) {
+        super(licenceNumber, speed, color, ownerName);
+        this.routeNo = routeNo;
+    }
+
+    void showData() {
+        super.showData();
+        System.out.println("Bus Details:");
+        System.out.println("Licence Number: " + licenceNumber);
+        System.out.println("Speed: " + speed);
+        System.out.println("Color: " + color);
+        System.out.println("Owner Name: " + ownerName);
+        System.out.println("Route No: " + routeNo);
+    }
+}
+
+class Car extends Vehicle {
+    private String manufacturerName;
+
+    Car(String licenceNumber, int speed, String color, String ownerName, String manufacturerName) {
+        super(licenceNumber, speed, color, ownerName);
+        this.manufacturerName = manufacturerName;
+    }
+
+    void showData() {
+        super.showData();
+        System.out.println("Car Details:");
+        System.out.println("Licence Number: " + licenceNumber);
+        System.out.println("Speed: " + speed);
+        System.out.println("Color: " + color);
+        System.out.println("Owner Name: " + ownerName);
+        System.out.println("Manufacturer Name: " + manufacturerName);
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        Bus bus = new Bus("WB-45-A1234", 60, "Blue", "Rakesh Kumar", "42A");
+        Car car = new Car("WB-12-B5678", 100, "Red", "Anjali Sharma", "Hyundai");
+
+        System.out.println("---- Bus Info ----");
+        bus.showData();
+
+        System.out.println("\n---- Car Info ----");
+        car.showData();
+    }
+}
+
+
+
+// ......................................................................................................................
+
+
+import java.util.Scanner;
+
+public class MatrixMultiplication {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input dimensions for first matrix
+        System.out.print("Enter rows of first matrix: ");
+        int r1 = sc.nextInt();
+        System.out.print("Enter columns of first matrix: ");
+        int c1 = sc.nextInt();
+
+        // Input dimensions for second matrix
+        System.out.print("Enter rows of second matrix: ");
+        int r2 = sc.nextInt();
+        System.out.print("Enter columns of second matrix: ");
+        int c2 = sc.nextInt();
+
+        // Check if multiplication is possible
+        if (c1 != r2) {
+            System.out.println("Matrix multiplication not possible. Columns of first matrix must equal rows of second.");
+            return;
+        }
+
+        int[][] mat1 = new int[r1][c1];
+        int[][] mat2 = new int[r2][c2];
+        int[][] result = new int[r1][c2];
+
+        // Input first matrix
+        System.out.println("Enter elements of first matrix:");
+        for (int i = 0; i < r1; i++) {
+            for (int j = 0; j < c1; j++) {
+                mat1[i][j] = sc.nextInt();
+            }
+        }
+
+        // Input second matrix
+        System.out.println("Enter elements of second matrix:");
+        for (int i = 0; i < r2; i++) {
+            for (int j = 0; j < c2; j++) {
+                mat2[i][j] = sc.nextInt();
+            }
+        }
+
+        // Multiply matrices
+        for (int i = 0; i < r1; i++) {
+            for (int j = 0; j < c2; j++) {
+                for (int k = 0; k < c1; k++) {
+                    result[i][j] += mat1[i][k] * mat2[k][j];
+                }
+            }
+        }
+
+        // Print result
+        System.out.println("Resultant matrix:");
+        for (int i = 0; i < r1; i++) {
+            for (int j = 0; j < c2; j++) {
+                System.out.print(result[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        sc.close();
+    }
+}
