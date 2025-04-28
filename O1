@@ -1,0 +1,147 @@
+// PACKAGE
+
+package mathops;
+
+public class Operations {
+    private int a;
+    private int b;
+
+    public Operations(int a, int b) {
+        this.a = a;
+        this.b = b;
+    }
+
+    public int add() {
+        return a + b;
+    }
+
+    public int subtract() {
+        return a - b;
+    }
+
+    public int multiply() {
+        return a * b;
+    }
+
+    public int divide() {
+        if (b == 0) {
+            throw new ArithmeticException("Division by zero not allowed.");
+        }
+        return a / b;
+    }
+}
+
+
+
+
+//...
+
+import mathops.Operations;
+import java.util.Scanner;
+
+class MainMathApp {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.print("Enter first number: ");
+            int a = scanner.nextInt();
+
+            System.out.print("Enter second number: ");
+            int b = scanner.nextInt();
+
+            Operations op = new Operations(a, b); 
+
+            System.out.println("Addition: " + op.add());
+            System.out.println("Subtraction: " + op.subtract());
+            System.out.println("Multiplication: " + op.multiply());
+            System.out.println("Division: " + op.divide());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}
+
+
+
+
+
+// ............................................................................................................................................................................................................
+
+// FACTORIAL
+
+import java.util.Scanner;
+
+class FactorialCalculator {
+    private long[] fact;
+
+    public FactorialCalculator(int size) {
+        fact = new long[size + 1];
+        fact[0] = 1;
+        for (int i = 1; i <= size; i++) {
+            fact[i] = fact[i-1] * i;
+        }
+    }
+
+    public long getFactorial(int x) {
+        if (x < 0) {
+            throw new IllegalArgumentException("value of x must be positive");
+        }
+        if (x >= fact.length) {
+            throw new IllegalArgumentException("result will overflow.");
+        }
+        return fact[x];
+    }
+}
+
+public class Fact {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        FactorialCalculator calculator = new FactorialCalculator(20);
+
+        System.out.print("Enter a number to compute factorial: ");
+        int n = scanner.nextInt();
+
+        try {
+            System.out.println("Factorial of " + n + " = " + calculator.getFactorial(n));
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        scanner.close();
+    }
+}
+
+// ...............................................................................................................................................................................
+
+// MANUAL EXCEPTION
+
+import java.util.Scanner;
+
+class ManualExceptionThrower {
+    public void validateAge(int age) {
+        if (age < 18) {
+            throw new ArithmeticException("Not eligible to vote");
+        } else {
+            System.out.println("Eligible to vote");
+        }
+    }
+}
+
+public class MainManualException {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ManualExceptionThrower thrower = new ManualExceptionThrower();
+
+        System.out.print("Enter your age: ");
+        int age = scanner.nextInt();
+
+        try {
+            thrower.validateAge(age);
+        } catch (ArithmeticException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        }
+        scanner.close();
+    }
+}
